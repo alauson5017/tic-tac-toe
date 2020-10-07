@@ -43,6 +43,8 @@ function addMessage(message) {
     messageUL.insertBefore(messageBlock, messageUL.children[0])
 }
 
-newGameButton
+newGameButton.addEventListener('click', (e) => {
+addMessage("Starting new game")
+})
 
 addMessage('test message')
