@@ -1,0 +1,43 @@
+.container {
+    
+    background-color: rebeccapurple;
+
+  }
+  .row {
+        display: flex;
+      
+  }
+  .column {
+    flex-direction: column;
+    background-color: rgb(124, 68, 179);
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
+  }
+
+/* html {
+    background-color: white;
+  }
+  
+  body {
+    background-color: rgba(rebeccapurple, 0.125);
+    width: 80%;
+    margin: auto;
+    padding: 5rem 0;
+  }
+  
+  div {
+    background-color: rgba(rebeccapurple, 0.25);
+    text-align: center;
+  } */
+  
+  /* .Grid {
+    @include flexgrid-container();
+    padding-bottom: 1rem;
+  
+    .col {
+      @include flexgrid-item();
+      margin-top: 1rem;
+      padding: 1rem 0;
+    }
+} */
