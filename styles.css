@@ -29,19 +29,22 @@
       vertical-align: middle;
   }
   .message {
-      display: flex;
+    display: flex;
     background-color: rgb(216, 203, 228);
     max-width: 500px;
     min-height: 120px;
+    max-height: 200px;
+    
   }
   .message-li {
-
+    text-overflow: clip;
   }
   #message-ul {
     list-style-type: none; /* Remove bullets */
     color: red;
     padding: 0; /* Remove padding */
     margin: 0; /* Remove margins */
+    
   }
 /* html {
     background-color: white;

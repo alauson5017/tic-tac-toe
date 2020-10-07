@@ -47,4 +47,4 @@ newGameButton.addEventListener('click', (e) => {
 addMessage("Starting new game")
 })
 
-addMessage('test message')
+// addMessage('test message')
