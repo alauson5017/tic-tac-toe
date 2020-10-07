@@ -9,10 +9,14 @@
 <body>
     <h1 class='title'>flexGrid</h1>
     <div class="container">
+        <div class="message">
+            <ul id="message-ul"></ul>
+        </div>
         <div class="row">
           <div class="column"></div>
           <div class="column"></div>
           <div class="column">O</div>
+          <div class="button" id="newGameButton">new game</div>
         </div>
         <div class="row">
           <div class="column">X</div>
@@ -25,6 +29,13 @@
           <div class="column">O</div>
         </div>
       </div>
+      <template id="message-template">
+        <li class="message-li">
+          <blockquote>Integer posuere erat a ante.</blockquote>
+          <p>Lorem ipsum</p>
+        </li>
+      </template>
     <script src="script.js"></script>
+
 </body>
 </html>

@@ -1,10 +1,13 @@
 .container {
     
     background-color: rebeccapurple;
+    text-align: center;
+    max-width: 500px;
 
   }
   .row {
         display: flex;
+        
       
   }
   .column {
@@ -13,8 +16,33 @@
     margin: 10px;
     padding: 20px;
     font-size: 30px;
+    min-width: 60px;
   }
+  .button {
+      align-content: flex-end;
+      background-color: rgb(216, 203, 228);
+      margin: 10px;
+      padding: 20px;
+      font-size: 15px;
+      min-width: 60px;
+      max-height: 20px;
+      vertical-align: middle;
+  }
+  .message {
+      display: flex;
+    background-color: rgb(216, 203, 228);
+    max-width: 500px;
+    min-height: 120px;
+  }
+  .message-li {
 
+  }
+  #message-ul {
+    list-style-type: none; /* Remove bullets */
+    color: red;
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margins */
+  }
 /* html {
     background-color: white;
   }

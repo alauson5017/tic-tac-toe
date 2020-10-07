@@ -1,5 +1,6 @@
 const winningCombosIndex = [[0,3,6],[1,4,7],[2,5,8],[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6]]
 const valArr = document.querySelectorAll('.column')
+const newGameButton = document.querySelector('#newGameButton')
 
 let whosTurn = 'O'
 let tempStr = ""
@@ -32,3 +33,16 @@ winningCombosIndex.forEach(combo => {
         console.log(combo)
     }
 })
+
+function addMessage(message) {
+    const template = document.querySelector('#message-template');
+    const messageUL = document.querySelector('#message-ul');
+    let messageBlock = document.importNode(template.content, true);
+    messageBlock.querySelector('blockquote').textContent = "> "+message
+    messageBlock.querySelector('p').textContent = ""
+    messageUL.insertBefore(messageBlock, messageUL.children[0])
+}
+
+newGameButton
+
+addMessage('test message')
