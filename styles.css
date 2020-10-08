@@ -29,22 +29,33 @@
       max-height: 20px;
       vertical-align: middle;
   }
+  #whosTurn {
+      display: none;
+      /* width: 20px; */
+  }
+  #pick {
+      display: none;
+  }
   .section-top {
       display: flex;
   }
   .message {
-    width: 70hw;
-    display: flex;
+    width: 340px;
+    height: 100vh;
+    /* display: flex; */
     background-color: rgb(216, 203, 228);
-    max-width: 500px;
+    /* max-width: 500px; */
     min-height: 120px;
     max-height: 200px;
     margin: 10px;
 
   }
   .statistics {
-    width: 70hw;
-      margin: 10px;
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
+    min-width: 60px;
+    min-height: 40px;
   }
   .message-li {
     text-overflow: clip;
