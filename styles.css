@@ -17,14 +17,17 @@
     padding: 20px;
     font-size: 30px;
     min-width: 60px;
+    min-height: 40px;
   }
   .button {
       align-content: flex-end;
+      text-align: center;
       background-color: rgb(216, 203, 228);
       margin: 10px;
-      padding: 20px;
-      font-size: 15px;
-      min-width: 60px;
+      padding: 30px;
+      font-size: 10px;
+      min-width: 40px;
+      max-width: 60px;
       max-height: 20px;
       vertical-align: middle;
   }
@@ -34,7 +37,7 @@
     max-width: 500px;
     min-height: 120px;
     max-height: 200px;
-    
+    text-overflow: ellipsis;
   }
   .message-li {
     text-overflow: clip;
