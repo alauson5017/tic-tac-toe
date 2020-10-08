@@ -7,8 +7,6 @@
   }
   .row {
         display: flex;
-        
-      
   }
   .column {
     flex-direction: column;
@@ -31,13 +29,22 @@
       max-height: 20px;
       vertical-align: middle;
   }
+  .section-top {
+      display: flex;
+  }
   .message {
+    width: 70hw;
     display: flex;
     background-color: rgb(216, 203, 228);
     max-width: 500px;
     min-height: 120px;
     max-height: 200px;
-    text-overflow: ellipsis;
+    margin: 10px;
+
+  }
+  .statistics {
+    width: 70hw;
+      margin: 10px;
   }
   .message-li {
     text-overflow: clip;

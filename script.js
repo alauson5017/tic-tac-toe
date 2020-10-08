@@ -8,7 +8,7 @@ let winner = false
 console.log('whosTurnButton.textContent', whosTurnButton.textContent)
 
 
-whosTurnButton.addEventListener('click', changeTurn())
+
 
 
 
@@ -16,15 +16,20 @@ whosTurnButton.addEventListener('click', changeTurn())
 // 1 if it matches the player whose turn it was
 // 0 if it belongs to the non-turn player or is null
 function changeTurn() {
-    if (whosTurn === 'X'){
-        whosTurn = 'O'
-    } else if (whosTurn === 'O'){
-        whosTurn = 'X'
+    if (whosTurn != '') {
+        if (whosTurn === 'X'){
+            whosTurn = 'O'
+        } else if (whosTurn === 'O'){
+            whosTurn = 'X'
+        } else {
+            addMessage(`X will start by default`)
+            whosTurn = 'X'
+        }
+        whosTurnButton.textContent = `Player ${whosTurn}'s Turn`
     } else {
-        addMessage(`X will start by default`)
-        whosTurn = 'X'
+        console.log('unknown turn')
+        whosTurn = 'O'
     }
-    whosTurnButton.textContent = `Player ${whosTurn}'s Turn`
 }
 function getBoardValues(player) {
     let tempStr = ""
@@ -90,11 +95,15 @@ newGameButton.addEventListener('click', (e) => {
 
 const squaresContainer = document.querySelector('.container')
 squaresContainer.addEventListener('click', (e) => {
+    if (whosTurn === '') {
+        changeTurn()
+    }
     if (!winner){
         if (e.target.classList.contains('gameSquare') && e.target.textContent === "") {
             e.target.textContent = whosTurn
             addMessage(`${whosTurn} turn is over`)
             let boardVals = getBoardValues(whosTurn)
+            console.log('boardVals',boardVals)
             hasWon(boardVals)
             console.log('hasWon(boardVals)', winner)
             if (winner) {
@@ -105,8 +114,10 @@ squaresContainer.addEventListener('click', (e) => {
             }
         }
 
+    } else {
+
     }
 
 })
 
- 
+whosTurnButton.addEventListener('click', changeTurn())
