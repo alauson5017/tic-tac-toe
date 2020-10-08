@@ -1,7 +1,7 @@
 const winningCombosIndex = [[0,3,6],[1,4,7],[2,5,8],[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6]]
 const valArr = document.querySelectorAll('.column')
 const newGameButton = document.querySelector('#newGameButton')
-
+scoreBoard = {"X":0, "O":0}
 let whosTurn = undefined
 let isDraw = false
 let winner = false
@@ -65,6 +65,7 @@ function hasWon(boardVals){
     })
 }
 
+
 function addMessage(message) {
     const template = document.querySelector('#message-template');
     const messageUL = document.querySelector('#message-ul');
@@ -93,19 +94,23 @@ function addMessage(message) {
 newGameButton.addEventListener('click', (e) => {
     winner = false
     whosTurn = undefined
+    isDraw = false
     valArr.forEach(char => {
         char.textContent = ""
     })
+    while (document.querySelector('#message-ul').childElementCount > 0) {
+        document.querySelector('#message-ul').lastElementChild.remove()
+    }
     addMessage("Starting new game")
     changeTurn()
 })
 
 const squaresContainer = document.querySelector('.container')
 squaresContainer.addEventListener('click', (e) => {
-    console.log(e.target.id)
-    console.log('whosTurn', whosTurn)
+    // console.log(e.target.id)
+    // console.log('whosTurn', whosTurn)
     if (whosTurn == undefined && e.target.id == 'pick') {
-        console.log(e.target.textContent[0])
+        // console.log(e.target.textContent[0])
         whosTurn = e.target.textContent[0]
         whosTurnButton.style.display = "inline";
         pickButtons.forEach(button => {
@@ -120,15 +125,15 @@ squaresContainer.addEventListener('click', (e) => {
             e.target.textContent = whosTurn
             addMessage(`${whosTurn} turn is over`)
             let boardVals = getBoardValues(whosTurn)
-            console.log('boardVals',boardVals)
+            // console.log('boardVals',boardVals)
             if (boardVals.length < 5) {
                 hasWon(boardVals)
-                console.log('hasWon(boardVals)', winner)
+                // console.log('hasWon(boardVals)', winner)
                 if (winner) {
                     addMessage(`${whosTurn} is the winner!`)
                 } else {
                     changeTurn()
-                    console.log('whosTurn', whosTurn)
+                    // console.log('whosTurn', whosTurn)
                 }
             } else {
                 isDraw = true
