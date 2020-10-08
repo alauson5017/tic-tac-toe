@@ -54,6 +54,7 @@
   .section-top {
       display: flex;
   }
+
   .message {
     width: 340px;
     height: 100vh;
@@ -66,15 +67,25 @@
 
   }
   .statistics {
+    background-color: rgb(216, 203, 228);
+    width: 100px;
     margin: 10px;
-    padding: 20px;
-    font-size: 30px;
+    /* padding: 20px; */
+    font-size: 10px;
     min-width: 60px;
     min-height: 40px;
+  }
+  .statistics.p {
+    text-align: left;
   }
   .message-li {
       text-align: left;
     text-overflow: clip;
+  }
+  #stat-ul {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margins */
   }
   #message-ul {
     list-style-type: none; /* Remove bullets */

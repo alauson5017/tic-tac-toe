@@ -1,7 +1,7 @@
 const winningCombosIndex = [[0,3,6],[1,4,7],[2,5,8],[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6]]
 const valArr = document.querySelectorAll('.column')
 const newGameButton = document.querySelector('#newGameButton')
-scoreBoard = {"X":0, "O":0}
+let scoreCard = {X:0,O:0,draw:0}
 let whosTurn = undefined
 let isDraw = false
 let winner = false
@@ -30,9 +30,8 @@ function changeTurn() {
 }
 function getBoardValues(player) {
     let tempStr = ""
-
     valArr.forEach(char => {
-        console.log(char.textContent)
+        // console.log(char.textContent)
         if (char.textContent === whosTurn){
             tempStr = tempStr+"1"
         } else {
@@ -47,7 +46,7 @@ function getBoardValues(player) {
     matches.forEach((match) => {
         indexMatchArr.push(match.index)
     });
-    console.log('indexMatchArr', indexMatchArr)
+    // console.log('indexMatchArr', indexMatchArr)
 
     return indexMatchArr
 }
@@ -58,7 +57,7 @@ function hasWon(boardVals){
         let intersecton = combo.filter(x => boardVals.includes(x))
         if(intersecton.length === 3){
             console.log("We have a winner")
-            console.log(combo)
+            // console.log(combo)
             winner = true
             return winner
         }
@@ -92,6 +91,18 @@ function addMessage(message) {
 }
 
 newGameButton.addEventListener('click', (e) => {
+    const statsTemplate = document.querySelector('#stat-template');
+    const statsUL = document.querySelector('#stat-ul');
+    let statsBlock = document.importNode(statsTemplate.content, true);
+    console.log("statsBlock", statsBlock)
+    statsBlock.querySelector('h3').textContent = "ScoreCard"
+    statsBlock.querySelector('#stat1').textContent = `X: ${scoreCard.X}`
+    statsBlock.querySelector('#stat2').textContent = `O: ${scoreCard.O}`
+    statsBlock.querySelector('#stat3').textContent = `Draw: ${scoreCard.draw}`
+    while (statsUL.childElementCount > 0) {
+        document.querySelector('#stat-ul').lastElementChild.remove()
+    }
+    statsUL.appendChild(statsBlock)
     winner = false
     whosTurn = undefined
     isDraw = false
@@ -115,12 +126,10 @@ squaresContainer.addEventListener('click', (e) => {
         whosTurnButton.style.display = "inline";
         pickButtons.forEach(button => {
             button.style.display = "none";
-
-    })
-    whosTurnButton.textContent = `Player ${whosTurn}'s Turn`
-
-}
-    if (!winner){
+        })
+        whosTurnButton.textContent = `Player ${whosTurn}'s Turn`
+    }
+    if (!winner && whosTurn != undefined){
         if (e.target.classList.contains('gameSquare') && e.target.textContent === "") {
             e.target.textContent = whosTurn
             addMessage(`${whosTurn} turn is over`)
@@ -131,19 +140,24 @@ squaresContainer.addEventListener('click', (e) => {
                 // console.log('hasWon(boardVals)', winner)
                 if (winner) {
                     addMessage(`${whosTurn} is the winner!`)
+                    if (whosTurn == "X"){
+                        scoreCard.X +=1
+                    } else {
+                        scoreCard.O +=1
+                    }
                 } else {
                     changeTurn()
                     // console.log('whosTurn', whosTurn)
                 }
             } else {
                 isDraw = true
+                scoreCard.draw +=1
                 addMessage("match is ended in a draw")
-                
             }
         }
 
     }
-
+    console.log('scorecard', scoreCard)
 })
 addMessage("welcome to game")
 whosTurnButton.addEventListener('click', changeTurn())
