@@ -20,6 +20,7 @@ function changeTurn() {
             whosTurn = 'X'
         }
         whosTurnButton.textContent = `Player ${whosTurn}'s Turn`
+        addMessage(`Player ${whosTurn}'s Turn`)
     } else {
         whosTurnButton.style.display = "none";
         pickButtons.forEach(button => {
@@ -46,8 +47,6 @@ function getBoardValues(player) {
     matches.forEach((match) => {
         indexMatchArr.push(match.index)
     });
-    // console.log('indexMatchArr', indexMatchArr)
-
     return indexMatchArr
 }
 
@@ -57,9 +56,8 @@ function hasWon(boardVals){
         let intersecton = combo.filter(x => boardVals.includes(x))
         if(intersecton.length === 3){
             console.log("We have a winner")
-            // console.log(combo)
             winner = true
-            return winner
+            // return winner
         }
     })
 }
@@ -69,7 +67,9 @@ function addMessage(message) {
     const template = document.querySelector('#message-template');
     const messageUL = document.querySelector('#message-ul');
     let messageBlock = document.importNode(template.content, true);
-    if (winner || isDraw){
+    //end game messaging if someone has won or it we have a draw
+    // else add new message to the message window
+    if (winner || isDraw){  
         while (messageUL.childElementCount > 0) {
             document.querySelector('#message-ul').lastElementChild.remove()
         }
@@ -79,26 +79,28 @@ function addMessage(message) {
             messageBlock.querySelector('h1').textContent = whosTurn+ " is the winner!"
         }
         messageBlock.querySelector('blockquote').textContent = ""
-    } else {
+    } else { 
         messageBlock.querySelector('blockquote').textContent = "> "+message
     }
     messageBlock.querySelector('p').textContent = ""
     messageUL.insertBefore(messageBlock, messageUL.children[0])
-    // console.log('messageUL.childElementCount', messageUL.childElementCount)
+    // trim old messages so it doesn't overflow the message div
     if (messageUL.childElementCount > 3){
         document.querySelector('#message-ul').lastElementChild.remove()
     }
 }
 
 newGameButton.addEventListener('click', (e) => {
+    // update stats when a new game is started
+    // remove the old stats element completely and recreate it with updated information
     const statsTemplate = document.querySelector('#stat-template');
     const statsUL = document.querySelector('#stat-ul');
     let statsBlock = document.importNode(statsTemplate.content, true);
-    console.log("statsBlock", statsBlock)
-    statsBlock.querySelector('h3').textContent = "ScoreCard"
-    statsBlock.querySelector('#stat1').textContent = `X: ${scoreCard.X}`
-    statsBlock.querySelector('#stat2').textContent = `O: ${scoreCard.O}`
-    statsBlock.querySelector('#stat3').textContent = `Draw: ${scoreCard.draw}`
+    // console.log("statsBlock", statsBlock)
+    statsBlock.querySelector('h2').textContent = "ScoreCard"
+    statsBlock.querySelector('#stat1').textContent = `X wins: ${scoreCard.X}`
+    statsBlock.querySelector('#stat2').textContent = `O wins: ${scoreCard.O}`
+    statsBlock.querySelector('#stat3').textContent = `Draws : ${scoreCard.draw}`
     while (statsUL.childElementCount > 0) {
         document.querySelector('#stat-ul').lastElementChild.remove()
     }
@@ -118,8 +120,6 @@ newGameButton.addEventListener('click', (e) => {
 
 const squaresContainer = document.querySelector('.container')
 squaresContainer.addEventListener('click', (e) => {
-    // console.log(e.target.id)
-    // console.log('whosTurn', whosTurn)
     if (whosTurn == undefined && e.target.id == 'pick') {
         // console.log(e.target.textContent[0])
         whosTurn = e.target.textContent[0]
@@ -127,37 +127,48 @@ squaresContainer.addEventListener('click', (e) => {
         pickButtons.forEach(button => {
             button.style.display = "none";
         })
+        addMessage(`Player ${whosTurn}'s Turn`)
         whosTurnButton.textContent = `Player ${whosTurn}'s Turn`
     }
+
     if (!winner && whosTurn != undefined){
         if (e.target.classList.contains('gameSquare') && e.target.textContent === "") {
             e.target.textContent = whosTurn
             addMessage(`${whosTurn} turn is over`)
             let boardVals = getBoardValues(whosTurn)
-            // console.log('boardVals',boardVals)
-            if (boardVals.length < 5) {
-                hasWon(boardVals)
-                // console.log('hasWon(boardVals)', winner)
-                if (winner) {
-                    addMessage(`${whosTurn} is the winner!`)
-                    if (whosTurn == "X"){
-                        scoreCard.X +=1
-                    } else {
-                        scoreCard.O +=1
-                    }
+            // if (boardVals.length < 5) {
+            hasWon(boardVals)
+            // console.log('hasWon(boardVals)',hasWon(boardVals) )
+            // console.log('winner', winner)
+            if (winner) {
+                addMessage(`${whosTurn} is the winner!`)
+                if (whosTurn == "X"){
+                    scoreCard.X +=1
                 } else {
-                    changeTurn()
-                    // console.log('whosTurn', whosTurn)
+                    scoreCard.O +=1
                 }
-            } else {
+            // } 
+        } else if (boardVals.length == 5 && !winner){
+            // console.log('boardVals.length', boardVals.length)
                 isDraw = true
                 scoreCard.draw +=1
-                addMessage("match is ended in a draw")
+                addMessage("we have a draw")
+            // }
+            } else {
+                changeTurn()
+                // console.log('whosTurn', whosTurn)
             }
+        // } else {
+        //     isDraw = true
+        //     scoreCard.draw +=1
+            // addMessage("match is ended in a draw")
         }
-
     }
-    console.log('scorecard', scoreCard)
+
+    // }
+    // console.log('scorecard', scoreCard)
 })
-addMessage("welcome to game")
+
+addMessage("Please select starting player")
+addMessage("Welcome to tic-tac-toe")
 whosTurnButton.addEventListener('click', changeTurn())
