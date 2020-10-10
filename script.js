@@ -9,9 +9,6 @@ let whosTurnButton = document.querySelector("#whosTurn")
 let pickButtons = document.querySelectorAll("#pick")
 
 
-// get value of each square and convert to a string
-// 1 if it matches the player whose turn it was
-// 0 if it belongs to the non-turn player or is null
 function changeTurn() {
     if (whosTurn != undefined) {
         if (whosTurn === 'X'){
@@ -26,13 +23,18 @@ function changeTurn() {
         pickButtons.forEach(button => {
             button.style.display = "inline";
         })
-            
+        
     }
 }
+
+
+// get value of each square and convert to a string
+// 1 if it matches the player whose turn it was
+// 0 if it belongs to the non-turn player or is null
 function getBoardValues(player) {
     let tempStr = ""
     valArr.forEach(char => {
-        // console.log(char.textContent)
+        console.log('char.textContent',char.textContent)
         if (char.textContent === whosTurn){
             tempStr = tempStr+"1"
         } else {
@@ -52,12 +54,12 @@ function getBoardValues(player) {
 
 function hasWon(boardVals){
     // if the index array has one of the winning combinations, declare the winner
+    console.log("boardVals",boardVals)
     winningCombosIndex.some(combo => {
         let intersecton = combo.filter(x => boardVals.includes(x))
         if(intersecton.length === 3){
             console.log("We have a winner")
             winner = true
-            // return winner
         }
     })
 }
@@ -79,6 +81,9 @@ function addMessage(message) {
             messageBlock.querySelector('h1').textContent = whosTurn+ " is the winner!"
         }
         messageBlock.querySelector('blockquote').textContent = ""
+        // hide turn button and display new game button
+        whosTurnButton.style.display = "none";
+        newGameButton.style.display = "inline";
     } else { 
         messageBlock.querySelector('blockquote').textContent = "> "+message
     }
@@ -116,12 +121,15 @@ newGameButton.addEventListener('click', (e) => {
     }
     addMessage("Starting new game")
     changeTurn()
+    newGameButton.style.display = "none";
+
 })
 
 const squaresContainer = document.querySelector('.container')
 squaresContainer.addEventListener('click', (e) => {
     if (whosTurn == undefined && e.target.id == 'pick') {
         // console.log(e.target.textContent[0])
+        
         whosTurn = e.target.textContent[0]
         whosTurnButton.style.display = "inline";
         pickButtons.forEach(button => {
@@ -134,12 +142,26 @@ squaresContainer.addEventListener('click', (e) => {
     if (!winner && whosTurn != undefined){
         if (e.target.classList.contains('gameSquare') && e.target.textContent === "") {
             e.target.textContent = whosTurn
+            console.log("whosTurn", whosTurn)
+            // e.target.classList = 'column gameSquare i'
+            //////
+            let icon = document.createElement('span')
+            // icon.className = "fa fa-circle-o"
+            if (whosTurn == 'O') {
+                icon.className = "fa fa-circle-o"
+                icon.id = "o"
+            } else {
+                icon.className = "fa fa-times"
+                icon.id = "x"
+            }
+            e.target.appendChild(icon)
+            // e.target.className = "fa fa-car"
+            // console.log('e.target.classList',e.target.classList )
+            // e.target.classList = `gameSquare ${whosTurn}`
+
             addMessage(`${whosTurn} turn is over`)
             let boardVals = getBoardValues(whosTurn)
-            // if (boardVals.length < 5) {
             hasWon(boardVals)
-            // console.log('hasWon(boardVals)',hasWon(boardVals) )
-            // console.log('winner', winner)
             if (winner) {
                 addMessage(`${whosTurn} is the winner!`)
                 if (whosTurn == "X"){
@@ -147,26 +169,15 @@ squaresContainer.addEventListener('click', (e) => {
                 } else {
                     scoreCard.O +=1
                 }
-            // } 
         } else if (boardVals.length == 5 && !winner){
-            // console.log('boardVals.length', boardVals.length)
                 isDraw = true
                 scoreCard.draw +=1
                 addMessage("we have a draw")
-            // }
             } else {
                 changeTurn()
-                // console.log('whosTurn', whosTurn)
             }
-        // } else {
-        //     isDraw = true
-        //     scoreCard.draw +=1
-            // addMessage("match is ended in a draw")
         }
     }
-
-    // }
-    // console.log('scorecard', scoreCard)
 })
 
 addMessage("Please select starting player")

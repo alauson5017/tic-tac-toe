@@ -1,6 +1,6 @@
 .container {
     
-    background-color: rebeccapurple;
+    background-color: #CCB568;
     text-align: center;
     max-width: 500px;
 
@@ -9,19 +9,37 @@
         display: flex;
         align-items: center;
   }
+  .row.div {
+    justify-content: space-between;
+  }
+  .gameSquare {
+    background-color: #E6CB76;
+
+  }
+ #o {
+    font-size: 40px;
+  }
+  #x {
+    font-size: 40px;
+  }
   .column {
     flex-direction: column;
-    background-color: rgb(124, 68, 179);
+    /* background-color: rgb(124, 68, 179); */
+    
     margin: 10px;
     padding: 20px;
-    font-size: 30px;
+    font-size: 0px;
     min-width: 60px;
     min-height: 40px;
   }
+
   .button {
-      align-content: flex-end;
+    display: none;
+      align-content: space-around;
       text-align: center;
-      background-color: rgb(216, 203, 228);
+      background-color: #B1C7E9;
+
+      /* background-color: rgb(216, 203, 228); */
       margin: 10px;
       padding: 30px;
       font-size: 10px;
@@ -53,28 +71,34 @@
   }
   .section-top {
       display: flex;
+      
   }
 
   .message {
-    width: 340px;
+    flex-basis: 75%;
+    /* width: 340px; */
     height: 100vh;
+    background-color: #EADDAB;
     /* display: flex; */
-    background-color: rgb(216, 203, 228);
+    /* background-color: rgb(216, 203, 228); */
     /* max-width: 500px; */
-    min-height: 120px;
+    /* min-height: 120px; */
     max-height: 200px;
     margin: 10px;
 
   }
   .statistics {
-    background-color: rgb(216, 203, 228);
-    width: 100px;
+    /* background-color: rgb(216, 203, 228); */
+    flex-basis: 20%;
+    /* flex-grow: 3; */
+    background-color: #EADDAB;
+    /* width: 100px; */
     margin: 10px;
     padding: 10px;
     text-align: left;
     font-size: 12px;
-    min-width: 60px;
-    min-height: 40px;
+    /* min-width: 60px; */
+    /* min-height: 40px; */
   }
   .statistics.p {
     text-align: left;
