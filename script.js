@@ -1,12 +1,12 @@
 const winningCombosIndex = [[0,3,6],[1,4,7],[2,5,8],[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6]]
 const valArr = document.querySelectorAll('.column')
 const newGameButton = document.querySelector('#newGameButton')
+let whosTurnButton = document.querySelector("#whosTurn")
+let pickButtons = document.querySelectorAll("#pick")
 let scoreCard = {X:0,O:0,draw:0}
 let whosTurn = undefined
 let isDraw = false
 let winner = false
-let whosTurnButton = document.querySelector("#whosTurn")
-let pickButtons = document.querySelectorAll("#pick")
 
 
 function changeTurn() {
@@ -17,11 +17,11 @@ function changeTurn() {
             whosTurn = 'X'
         }
         whosTurnButton.textContent = `Player ${whosTurn}'s Turn`
-        addMessage(`Player ${whosTurn}'s Turn`)
+        // addMessage(`Player ${whosTurn}'s Turn`)
     } else {
         whosTurnButton.style.display = "none";
         pickButtons.forEach(button => {
-            button.style.display = "inline";
+            button.style.display = "block";
         })
         
     }
@@ -76,16 +76,16 @@ function addMessage(message) {
             document.querySelector('#message-ul').lastElementChild.remove()
         }
         if (isDraw) {
-            messageBlock.querySelector('h1').textContent = "You have battled to a draw"
+            messageBlock.querySelector('h1').textContent = " You have battled to a draw"
         } else {
-            messageBlock.querySelector('h1').textContent = whosTurn+ " is the winner!"
+            messageBlock.querySelector('h1').textContent = " "+whosTurn+ " is the winner!"
         }
         messageBlock.querySelector('blockquote').textContent = ""
         // hide turn button and display new game button
         whosTurnButton.style.display = "none";
-        newGameButton.style.display = "inline";
+        newGameButton.style.display = "block";
     } else { 
-        messageBlock.querySelector('blockquote').textContent = "> "+message
+        messageBlock.querySelector('blockquote').textContent = "- "+message
     }
     messageBlock.querySelector('p').textContent = ""
     messageUL.insertBefore(messageBlock, messageUL.children[0])
@@ -125,19 +125,34 @@ newGameButton.addEventListener('click', (e) => {
 
 })
 
-const squaresContainer = document.querySelector('.container')
-squaresContainer.addEventListener('click', (e) => {
+const buttonsAll = document.querySelector('.buttonContainer')
+buttonsAll.addEventListener('click', (e) => {
     if (whosTurn == undefined && e.target.id == 'pick') {
-        // console.log(e.target.textContent[0])
         
         whosTurn = e.target.textContent[0]
-        whosTurnButton.style.display = "inline";
+        whosTurnButton.style.display = "block";
         pickButtons.forEach(button => {
             button.style.display = "none";
         })
         addMessage(`Player ${whosTurn}'s Turn`)
         whosTurnButton.textContent = `Player ${whosTurn}'s Turn`
     }
+})
+
+
+
+const squaresContainer = document.querySelector('.container')
+squaresContainer.addEventListener('click', (e) => {
+    // if (whosTurn == undefined && e.target.id == 'pick') {
+        
+    //     whosTurn = e.target.textContent[0]
+    //     whosTurnButton.style.display = "inline";
+    //     pickButtons.forEach(button => {
+    //         button.style.display = "none";
+    //     })
+    //     addMessage(`Player ${whosTurn}'s Turn`)
+    //     whosTurnButton.textContent = `Player ${whosTurn}'s Turn`
+    // }
 
     if (!winner && whosTurn != undefined){
         if (e.target.classList.contains('gameSquare') && e.target.textContent === "") {
@@ -155,10 +170,6 @@ squaresContainer.addEventListener('click', (e) => {
                 icon.id = "x"
             }
             e.target.appendChild(icon)
-            // e.target.className = "fa fa-car"
-            // console.log('e.target.classList',e.target.classList )
-            // e.target.classList = `gameSquare ${whosTurn}`
-
             addMessage(`${whosTurn} turn is over`)
             let boardVals = getBoardValues(whosTurn)
             hasWon(boardVals)
@@ -169,7 +180,7 @@ squaresContainer.addEventListener('click', (e) => {
                 } else {
                     scoreCard.O +=1
                 }
-        } else if (boardVals.length == 5 && !winner){
+            } else if (boardVals.length == 5 && !winner){
                 isDraw = true
                 scoreCard.draw +=1
                 addMessage("we have a draw")
@@ -181,5 +192,5 @@ squaresContainer.addEventListener('click', (e) => {
 })
 
 addMessage("Please select starting player")
-addMessage("Welcome to tic-tac-toe")
+// addMessage("Welcome to tic-tac-toe")
 whosTurnButton.addEventListener('click', changeTurn())

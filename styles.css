@@ -1,104 +1,110 @@
 .container {
-    
-    background-color: #CCB568;
-    text-align: center;
-    max-width: 500px;
-
-  }
-  .row {
-        display: flex;
-        align-items: center;
-  }
-  .row.div {
-    justify-content: space-between;
-  }
-  .gameSquare {
-    background-color: #E6CB76;
-
-  }
- #o {
-    font-size: 40px;
-  }
-  #x {
-    font-size: 40px;
-  }
-  .column {
-    flex-direction: column;
-    /* background-color: rgb(124, 68, 179); */
-    
-    margin: 10px;
-    padding: 20px;
-    font-size: 0px;
-    min-width: 60px;
-    min-height: 40px;
-  }
-
-  .button {
-    display: none;
-      align-content: space-around;
-      text-align: center;
-      background-color: #B1C7E9;
-
-      /* background-color: rgb(216, 203, 228); */
-      margin: 10px;
-      padding: 30px;
-      font-size: 10px;
-      min-width: 40px;
-      max-width: 60px;
-      max-height: 20px;
-      font-size: 15px;
-      vertical-align: middle;
-  }
-  #whosTurn {
-      display: none;
-      color: red;
-      font-size: 15px;
-      text-align: inherit;
-      padding: 10px;
-      min-width: 80px;
-      min-height: 60px;
-      /* width: 20px; */
-  }
-  #pick {
-      display: none;
-      color: red;
-      font-size: 15px;
-      text-align: inherit;
-      padding: 10px;
-      min-width: 80px;
-      max-height: 40px;
-    
-  }
-  .section-top {
+  display: flex;
+  background-color: #CCB568;
+  text-align: center;
+  max-width: 500px;
+  min-width: 400px;
+  flex-direction: column;
+}
+.flex-grid {
+  display: flex;
+  flex-direction: column;
+  max-width: 75%;
+}
+.section-top {
+  flex-basis: 100%;
+  display: flex;
+  
+}
+.section {
+  flex-direction: row;
+  display: flex;
+}
+.buttonContainer {
+  min-height: 300px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  max-width: 25%;
+  align-self: flex-end;
+}
+.row {
       display: flex;
-      
-  }
+      align-items: center;
+}
+.row.div {
+  justify-content: space-between;
+}
+.gameSquare {
+  background-color: #E6CB76;
+}
+#o {
+  color: #498FB3;
+  font-size: 40px;
+}
+#x {
+  color: #807C0E;
+  font-size: 40px;
+}
+
+.column {
+  border-radius: 25px;
+  flex-direction: column;
+  margin: 10px;
+  padding: 20px;
+  font-size: 0px;
+  min-width: 60px;
+  min-height: 40px;
+}
+
+.button {
+  align-items: flex-end;
+  justify-content: flex-end;
+  border-radius: 10px;
+  display: none;
+  min-height: 60px;
+  line-height: 60px;
+    align-content: flex-end;
+    text-align: center;
+    background-color: #B1C7E9;
+    margin: 10px;
+    font-size: 15px;
+    vertical-align: middle;
+}
+#whosTurn {
+    display: none;
+    color: red;
+    text-align: inherit;
+    padding: 10px;
+    min-height: 60px;
+}
+#pick {
+    flex-direction: column;
+    display: none;
+    color: red;
+    font-size: 15px;
+    text-align: center;
+    padding: 10px;
+}
 
   .message {
+    border-radius: 10px;
     flex-basis: 75%;
-    /* width: 340px; */
     height: 100vh;
     background-color: #EADDAB;
-    /* display: flex; */
-    /* background-color: rgb(216, 203, 228); */
-    /* max-width: 500px; */
-    /* min-height: 120px; */
     max-height: 200px;
     margin: 10px;
+    padding: 20px
 
   }
   .statistics {
-    /* background-color: rgb(216, 203, 228); */
+    border-radius: 10px;
     flex-basis: 20%;
-    /* flex-grow: 3; */
     background-color: #EADDAB;
-    /* width: 100px; */
     margin: 10px;
     padding: 10px;
     text-align: left;
     font-size: 12px;
-    /* min-width: 60px; */
-    /* min-height: 40px; */
   }
   .statistics.p {
     text-align: left;
@@ -119,29 +125,23 @@
     margin: 0; /* Remove margins */
     
   }
-/* html {
-    background-color: white;
-  }
-  
-  body {
-    background-color: rgba(rebeccapurple, 0.125);
-    width: 80%;
-    margin: auto;
-    padding: 5rem 0;
-  }
-  
-  div {
-    background-color: rgba(rebeccapurple, 0.25);
-    text-align: center;
-  } */
-  
-  /* .Grid {
-    @include flexgrid-container();
-    padding-bottom: 1rem;
-  
-    .col {
-      @include flexgrid-item();
-      margin-top: 1rem;
-      padding: 1rem 0;
+
+  @media screen and (max-width: 600px) {
+    .section {
+      flex-direction: column;
+      display: flex;
     }
-} */
+    .buttonContainer{
+      min-height: 200px;
+      max-width: 200px;
+      align-items: center;
+      align-self: flex-start;
+      justify-content: stretch;
+    }
+    .button {
+      width: 200px;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px, 100px;
+    }
+  }

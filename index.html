@@ -20,25 +20,40 @@
                 <div id="stat-ul"></div>
             </div>
         </div>
-        <div class="row">
-          <div class="column gameSquare"></div>
-          <div class="column gameSquare"></div>
-          <div class="column gameSquare"></div>
-          <div></div>
-        </div>
-        <div class="row">
-          <div class="column gameSquare"></div>
-          <div class="column gameSquare"></div>
-          <div class="column gameSquare"></div>
-          <div class="button" id="pick" value="O">O goes first</div>
-        </div>
-        <div class="row">
-          <div class="column gameSquare"></div>
-          <div class="column gameSquare"></div>
-          <div class="column gameSquare"></div>
-          <div class="button" id="whosTurn"></div>
-          <div class="button" id="pick" value="X">X goes first</div>
-          <div class="button" id="newGameButton">new <br /> game</div>
+        <div class="section">
+
+          <div class="flex-grid">
+  
+            <div class="row first">
+              <div class="column gameSquare"></div>
+              <div class="column gameSquare"></div>
+              <div class="column gameSquare"></div>
+              <!-- <div class="button desktop" id="whosTurn"></div> -->
+              <!-- <div></div> -->
+            </div>
+            <div class="row second">
+              <div class="column gameSquare"></div>
+              <div class="column gameSquare"></div>
+              <div class="column gameSquare"></div>
+              <!-- <div class="buttonContainer">
+                <div class="button full" id="pick" value="O">O goes first</div>
+              </div> -->
+              <!-- <div class="button desktop" id="pick" value="O">O goes first</div>x -->
+            </div>
+            <div class="row third">
+              <div class="column gameSquare"></div>
+              <div class="column gameSquare"></div>
+              <div class="column gameSquare"></div>
+          </div>
+            <!-- <div class="button desktop" id="pick" value="X">X goes first</div>
+            <div class="button desktop" id="newGameButton">new <br /> game</div> -->
+          </div>
+          <div class="buttonContainer">
+            <div class="button" id="whosTurn"></div>
+            <div class="button mobile" id="pick" value="O">O goes first</div>
+            <div class="button" id="pick" value="X">X goes first</div>
+            <div class="button" id="newGameButton">new game</div>
+          </div>
         </div>
       </div>
       <template id="message-template">
