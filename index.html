@@ -8,59 +8,46 @@
     <title>tic-tac-toe</title>
 </head>
 <body>
-    <h1 class='title'>TicTacToe</h1>
-    <!-- <i class="fa fa-car" style="font-size:60px;color:red;"></i>
-    <span class="far fa-circle"></span> -->
     <div class="container">
-        <div class="section-top">
-            <div class="message">
-                <ul id="message-ul"></ul>
-            </div>
-            <div class="statistics">
-                <div id="stat-ul"></div>
-            </div>
-        </div>
-        <div class="section">
-
-          <div class="flex-grid">
-  
-            <div class="row first">
-              <div class="column gameSquare"></div>
-              <div class="column gameSquare"></div>
-              <div class="column gameSquare"></div>
-              <!-- <div class="button desktop" id="whosTurn"></div> -->
-              <!-- <div></div> -->
-            </div>
-            <div class="row second">
-              <div class="column gameSquare"></div>
-              <div class="column gameSquare"></div>
-              <div class="column gameSquare"></div>
-              <!-- <div class="buttonContainer">
-                <div class="button full" id="pick" value="O">O goes first</div>
-              </div> -->
-              <!-- <div class="button desktop" id="pick" value="O">O goes first</div>x -->
-            </div>
-            <div class="row third">
-              <div class="column gameSquare"></div>
-              <div class="column gameSquare"></div>
-              <div class="column gameSquare"></div>
+      <h1 class='title'>TicTacToe</h1>
+      <div class="section-top">
+          <div class="message">
+              <ul id="message-ul"></ul>
           </div>
-            <!-- <div class="button desktop" id="pick" value="X">X goes first</div>
-            <div class="button desktop" id="newGameButton">new <br /> game</div> -->
+          <div class="statistics">
+              <div id="stat-ul"></div>
           </div>
-          <div class="buttonContainer">
-            <div class="button" id="whosTurn"></div>
-            <div class="button mobile" id="pick" value="O">O goes first</div>
-            <div class="button" id="pick" value="X">X goes first</div>
-            <div class="button" id="newGameButton">new game</div>
+      </div>
+      <div class="section">
+        <div class="flex-grid">
+          <div class="row first">
+            <div class="column gameSquare"></div>
+            <div class="column gameSquare"></div>
+            <div class="column gameSquare"></div>
+          </div>
+          <div class="row second">
+            <div class="column gameSquare"></div>
+            <div class="column gameSquare"></div>
+            <div class="column gameSquare"></div>
+          </div>
+          <div class="row third">
+            <div class="column gameSquare"></div>
+            <div class="column gameSquare"></div>
+            <div class="column gameSquare"></div>
           </div>
         </div>
+        <div class="buttonContainer">
+          <div class="button" id="whosTurn"></div>
+          <div class="button mobile" id="pick" value="O">O goes first</div>
+          <div class="button" id="pick" value="X">X goes first</div>
+          <div class="button" id="newGameButton">new game</div>
+        </div>
+      </div>
       </div>
       <template id="message-template">
         <li class="message-li">
-            <h1></h1>
-          <blockquote>Integer posuere erat a ante.</blockquote>
-          <p>Lorem ipsum</p>
+          <h1></h1>
+          <p></p>
         </li>
       </template>
       <template id="stat-template">
@@ -70,6 +57,7 @@
             <p id='stat2'></blockquote>
             <p id='stat3'></blockquote>
             </div>
+            <h4></h4>
       </template>
     <script src="script.js"></script>
 

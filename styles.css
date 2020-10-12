@@ -89,7 +89,7 @@
 
   .message {
     border-radius: 10px;
-    flex-basis: 75%;
+    flex-basis: 66%;
     height: 100vh;
     background-color: #EADDAB;
     max-height: 200px;
@@ -126,7 +126,10 @@
     
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 500px) {
+    .container {
+      flex-grow: 2;
+    }
     .section {
       flex-direction: column;
       display: flex;
