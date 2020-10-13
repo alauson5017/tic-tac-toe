@@ -1,6 +1,6 @@
 const winningCombosIndex = [[0,3,6],[1,4,7],[2,5,8],[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6]]
-const gameCommentary = ["So close","Late drama","This is why we love this game","Make them pay","All in a day's work","Keep going","Absolutely omnipotent","No stopping now","Hanging on by a thread","Onto something here","A game-changing move","The momentum has shifted","Absolutely fantastic","We are off and running","A wonderful move","A crazy moment","I didn't see that coming","Cunning move!","This is an epic battle","That was unfortunate","Brilliant","Pure tactical brilliance","A counterattack","{whosTurn} has been put on the defensive","It all comes down to this","Here’s the chance!","The fox is in the box","Superbly done!","Great opportunity","Well Done","An audacious attempt.","What a build-up","Could this be it?","What anticipation!","There it is","Oh!","Here it comes"]
-const matchCommentary = []
+const gameCommentary = ["So close","Late drama","This is why we love this game","Make them pay","All in a day's work","Keep going","Absolutely omnipotent","No stopping now","Hanging on by a thread","Onto something here","A game-changing move","The momentum has shifted","Absolutely fantastic","We are off and running","A wonderful move","A crazy moment","I didn't see that coming","Cunning move!","This is an epic battle","That was unfortunate","Brilliant","Pure tactical brilliance","A counterattack","Put on the defensive","It all comes down to this","Here’s the chance!","The fox is in the box","Superbly done!","Great opportunity","Well Done","An audacious attempt.","What a build-up","Could this be it?","What anticipation!","There it is","Oh!","Here it comes"]
+const matchCommentary = {notClose: ["What can loser do from this position","winner has been much the better side!","winner’s definitely superb.","This match is being controlled by winner","loser DO BETTER!","winner is sending a message to loser today","loser’s not waving the white flag just yet, but they are unfurling it.","winning is humiliating losing","Looks like losing forgot to show up today","winning’s every move is a winner","losing can’t catch a break today"], close: ["Plenty of energy in this matchup.","Who will seize the momentum?","This is one of the best matches I have ever seen.","Neither player has a clear advantage.","The victor is still in question.","Do not scratch your eyes! You are really seeing the most extraordinary matchup.","This is a close one","This is a tightly contested battle","This is an evenly matched competition","This could go either way"]}
 const valArr = document.querySelectorAll('.column')
 const newGameButton = document.querySelector('#newGameButton')
 let whosTurnButton = document.querySelector("#whosTurn")
@@ -9,7 +9,6 @@ let scoreCard = {X:0,O:0,draw:0}
 let whosTurn = undefined
 let isDraw = false
 let winner = false
-
 
 function changeTurn() {
     if (whosTurn != undefined) {
@@ -70,6 +69,22 @@ function randomComment() {
     return comment;
 }
 
+function randomMatchCommentary () {
+    
+    if (scoreCard.X - scoreCard.O > 2) {
+        matchComment = matchCommentary.notClose[Math.floor(Math.random() * matchCommentary.notClose.length)];
+        matchComment = matchComment.replace('winning','X')
+        matchComment = matchComment.replace('losing','O')
+    } else if (scoreCard.O - scoreCard.X > 2) {
+        matchComment = matchCommentary.notClose[Math.floor(Math.random() * matchCommentary.notClose.length)];
+        matchComment = matchComment.replace('winning','O')
+        matchComment = matchComment.replace('losing','X')
+    } else {
+        matchComment = matchCommentary.close[Math.floor(Math.random() * matchCommentary.close.length)];
+    }
+    return matchComment
+}
+
 function addMessage(message) {
     const template = document.querySelector('#message-template');
     const messageUL = document.querySelector('#message-ul');
@@ -109,10 +124,12 @@ newGameButton.addEventListener('click', (e) => {
     statsBlock.querySelector('#stat1').textContent = `X wins: ${scoreCard.X}`
     statsBlock.querySelector('#stat2').textContent = `O wins: ${scoreCard.O}`
     statsBlock.querySelector('#stat3').textContent = `Draws : ${scoreCard.draw}`
+    statsBlock.querySelector('h4').textContent = randomMatchCommentary()
     while (statsUL.childElementCount > 0) {
         document.querySelector('#stat-ul').lastElementChild.remove()
     }
     statsUL.appendChild(statsBlock)
+    console.log(randomMatchCommentary())
     winner = false
     whosTurn = undefined
     isDraw = false
@@ -169,10 +186,12 @@ squaresContainer.addEventListener('click', (e) => {
                 } else {
                     scoreCard.O +=1
                 }
+                // console.log(matchCommentary())
             } else if (boardVals.length == 5 && !winner){
                 isDraw = true
                 scoreCard.draw +=1
                 addMessage("we have a draw")
+                // console.log(matchCommentary())
             } else {
                 changeTurn()
             }
