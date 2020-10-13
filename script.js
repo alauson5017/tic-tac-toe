@@ -21,7 +21,6 @@ function changeTurn() {
         pickButtons.forEach(button => {
             button.style.display = "block";
         })
-        
     }
 }
 
@@ -64,7 +63,7 @@ function hasWon(boardVals){
         } else {
             scoreCard.O +=1
         }
-    } else if (boardVals.length == 5 && !winner){
+    } else if (boardVals.length == 5 && !winner){//determine if it is a draw
         isDraw = true
         scoreCard.draw +=1
         addMessage("we have a draw")
@@ -149,7 +148,7 @@ buttonsAll.addEventListener('click', (e) => {
             button.style.display = "none";
         })
         whosTurnButton.textContent = `${whosTurn}'s Turn`  // update the "Who's turn" button
-    } else { // start a new game button is the last option
+    } else if (e.target.id == 'newGameButton') { // start a new game button is the last option
         updateStatistics()
         winner = false
         whosTurn = undefined
