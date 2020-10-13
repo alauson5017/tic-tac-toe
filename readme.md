@@ -21,7 +21,7 @@ This game is a must have for anyone who:
 - Players can locally battle head-to-head in Tic Tac Toe
 - Select who starts each round
 - Score card keeps running match totals and privides scenario-based analysis
-- Each move results in snappy commentary
+- Each move results in random commentary
 - No refresh required to start new game
 - Responsive design for mobile or desktop
 

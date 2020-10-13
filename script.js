@@ -18,7 +18,7 @@ function changeTurn() {
         whosTurnButton.textContent = `${whosTurn}'s Turn`
     } else {
         whosTurnButton.style.display = "none";
-        pickButtons.forEach(button => {
+        pickButtons.forEach(button => { // if whosTurn is undefined show the "X/O goes first" buttons
             button.style.display = "block";
         })
     }
@@ -27,7 +27,7 @@ function changeTurn() {
 // get value of each square and convert to a string
 // 1 if it matches the player whose turn it was
 // 0 if it belongs to the non-turn player or is null
-function getBoardValues(player) {
+function getBoardValues() {
     let tempStr = ""
     valArr.forEach(char => {
         if (char.textContent === whosTurn){
@@ -40,13 +40,14 @@ function getBoardValues(player) {
     // determine the index of all the players squares and put into an array
     let indexMatchArr = []
     let regexp = /1/g;
-    let matches = [...tempStr.matchAll(regexp)];//todo; understand the ellipsis in this statement
+    let matches = [...tempStr.matchAll(regexp)];
     matches.forEach((match) => {
         indexMatchArr.push(match.index)
     });
     return indexMatchArr
 }
 
+// evaluate board vs known winning combos
 function hasWon(boardVals){
     const winningCombosIndex = [[0,3,6],[1,4,7],[2,5,8],[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6]]
     // if the index array has one of the winning combinations, determine if there is a winner
@@ -70,6 +71,7 @@ function hasWon(boardVals){
     }
 }
 
+// comment engine
 function randomComment(type) {
     const gameCommentary = ["So close","Late drama","This is why we love this game","Make them pay","All in a day's work","Keep going","Absolutely omnipotent","No stopping now","Hanging on by a thread","Onto something here","A game-changing move","The momentum has shifted","Absolutely fantastic","We are off and running","A wonderful move","A crazy moment","I didn't see that coming","Cunning move!","This is an epic battle","That was unfortunate","Brilliant","Pure tactical brilliance","A counterattack","Put on the defensive","It all comes down to this","Here’s the chance!","The fox is in the box","Superbly done!","Great opportunity","Well Done","An audacious attempt.","What a build-up","Could this be it?","What anticipation!","Hot Diggity!","There it is","Oh!","Here it comes","Is this the knockout blow?","A back-and-forth affair","I am not sure about that one.","A superior play!","A bit of menace to that play.","Let’s get it going!","Could this be it?","Ay yi yi!","Abracadabra!","Oooof","Smokin!","Uff Da.","Truly opportunistic"]
     const matchCommentary = {notClose: ["This is a day losing would love to forget.","losing knew about winning but couldn’t stop them","winning is playing with confidence and swagger.","winning is putting on a clinic","losing has been outclassed in all phases of the game","What can losing do from this position","winning has been much the better side!","winning’s definitely superb.","This match is being controlled by winning","losing DO BETTER!","winning is sending a message to losing today","losing’s not waving the white flag just yet, but they are unfurling it.","winning is humiliating losing","Looks like losing forgot to show up today","winning’s every move is a winner","losing can’t catch a break today"], close: ["Definitely a “game-of-the-year” candidate","Neither team can seize control of this matchup","Neither competitor has claimed a clear advantage","Plenty of energy in this matchup.","Who will seize the momentum?","This is one of the best matches I have ever seen.","Neither player has a clear advantage.","The victor is still in question.","You are really seeing the most extraordinary matchup.","This is a close one","This is a tightly contested battle","This is an evenly matched competition","This could go either way"]}
@@ -97,6 +99,7 @@ function randomComment(type) {
     return comment;
 }
 
+// messaging functions handled here
 function addMessage(message) {
     const template = document.querySelector('#message-template');
     const messageUL = document.querySelector('#message-ul');
@@ -114,7 +117,7 @@ function addMessage(message) {
         }
         // hide turn button and display new game button
         whosTurnButton.style.display = "none";
-        newGameButton.style.display = "block";
+        newGameButton.style.display = "block"; 
     } else { 
         messageBlock.querySelector('p').textContent = "- "+message
     }
@@ -124,6 +127,8 @@ function addMessage(message) {
         document.querySelector('#message-ul').lastElementChild.remove()
     }
 }
+
+// update the scorecard and publish it
 function updateStatistics() {
     const statsTemplate = document.querySelector('#stat-template');
     const statsUL = document.querySelector('#stat-ul');
@@ -139,8 +144,9 @@ function updateStatistics() {
     statsUL.appendChild(statsBlock)
 }
 
+// button events handled here
 const buttonsAll = document.querySelector('.buttonContainer')
-buttonsAll.addEventListener('click', (e) => {
+buttonsAll.addEventListener('click', (e) => { 
     if (whosTurn == undefined && e.target.id == 'pick') {  // determine who goes first
         whosTurn = e.target.textContent[0]
         whosTurnButton.style.display = "block";
@@ -153,7 +159,7 @@ buttonsAll.addEventListener('click', (e) => {
         winner = false
         whosTurn = undefined
         isDraw = false
-        valArr.forEach(char => {
+        valArr.forEach(char => { // clear board values
             char.textContent = ""
         })
         while (document.querySelector('#message-ul').childElementCount > 0) {
@@ -162,10 +168,11 @@ buttonsAll.addEventListener('click', (e) => {
         addMessage("Starting new game.")
         addMessage("Please select the starting player")
         changeTurn()
-        newGameButton.style.display = "none";
+        newGameButton.style.display = "none"; // hide new game button
     }
 })
 
+// handler for click events on game tiles/squares
 const squaresContainer = document.querySelector('.container')
 squaresContainer.addEventListener('click', (e) => {
     if (!winner && whosTurn != undefined){ // if we do not have a winner and we know whose turn it is
@@ -181,28 +188,11 @@ squaresContainer.addEventListener('click', (e) => {
             }
             e.target.appendChild(icon)
             addMessage(randomComment('game'))
-            let boardVals = getBoardValues(whosTurn)
+            let boardVals = getBoardValues()
             hasWon(boardVals)
-           
-            // if (winner) {
-            //     addMessage(`${whosTurn} is the winner!`)
-            //     if (whosTurn == "X"){
-            //         scoreCard.X +=1
-            //     } else {
-            //         scoreCard.O +=1
-            //     }
-            //     // console.log(matchCommentary())
-            // } else if (boardVals.length == 5 && !winner){
-            //     isDraw = true
-            //     scoreCard.draw +=1
-            //     addMessage("we have a draw")
-            //     // console.log(matchCommentary())
-            // } else {
-
-                if (!winner){
-                    changeTurn()
-                }
-            // }
+            if (!winner){
+                changeTurn()
+            }
         }
     }
 })
