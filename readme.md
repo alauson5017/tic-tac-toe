@@ -1,4 +1,10 @@
 <h1 align="center">Tic Tac Toe</h1>
+<img src="https://img.shields.io/github/commit-activity/m/alauson5017/tic-tac-toe">
+<img src="https://img.shields.io/github/last-commit/alauson5017/tic-tac-toe">
+<img src="https://img.shields.io/github/languages/count/alauson5017/tic-tac-toe">
+<img src="https://img.shields.io/github/languages/top/alauson5017/tic-tac-toe">
+<img src="https://img.shields.io/tokei/lines/github/alauson5017/tic-tac-toe">
+
 A fun twist on a an all-time classic game.  
 Tic tac toe is a two player html game where you and your opponent take turns until one of you has three in a row.  
 
