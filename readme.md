@@ -1,6 +1,6 @@
 <h1 align="center">Tic Tac Toe</h1>
 <img src="https://img.shields.io/github/issues/alauson5017/tic-tac-toe" target="_blank" />
-<img src="https://img.shields.io/github/stars/alauson5017/tic-tac-toe" target="_blank" />
+<img display="inline" src="https://img.shields.io/github/stars/alauson5017/tic-tac-toe" target="_blank" />
 <img src="https://img.shields.io/github/last-commit/alauson5017/tic-tac-toe" target="_blank" />
 <img src="https://img.shields.io/github/languages/count/alauson5017/tic-tac-toe" target="_blank" />
 <img src="https://img.shields.io/github/languages/top/alauson5017/tic-tac-toe" target="_blank" />
