@@ -13,7 +13,7 @@ A fun twist on a classic game.  Tic tac toe is a two player web-based game where
 - Players can play the game again without refreshing the page
 - Keep track of multiple game rounds with a win, lose and tie counter
 - Make your site fully responsive so that it is playable from a mobile phone
-- Commentator with some game logic built.
+- Commentator who features primitive game logic.
 
 ## Technologies Used
 - html, javascript, css

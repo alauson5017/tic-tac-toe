@@ -109,15 +109,14 @@
   .statistics.p {
     text-align: left;
   }
+  .statistics.h4 {
+    text-align: end;
+  }
   .message-li {
       text-align: left;
     text-overflow: clip;
   }
-  #stat-ul {
-    list-style-type: none; /* Remove bullets */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margins */
-  }
+  
   #message-ul {
     list-style-type: none; /* Remove bullets */
     color: red;
